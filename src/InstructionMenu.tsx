@@ -1,4 +1,4 @@
-import { Card, styled, Typography } from "@mui/material"
+import { Card, CardContent, styled, Typography } from "@mui/material"
 import React from "react"
 import instructions from "./Instructions"
 import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip"
@@ -32,10 +32,10 @@ export default function InstructionMenu() {
                     <Typography>{instruction.description}</Typography>
                   </>
                 }>
-                <Card>
-                  <Typography display="inline" noWrap>
-                    {instruction.symbol}
-                  </Typography>
+                <Card key={key++} sx={{ height: "3rem", width: "3rem" }}>
+                  <CardContent>
+                    <Typography sx={{ userSelect: "none" }}>{instruction.symbol}</Typography>
+                  </CardContent>
                 </Card>
               </HtmlTooltip>
             </div>
