@@ -269,8 +269,7 @@ const instructions: Instruction[] = [
     ascii: "@",
     description: "End program",
     searchtags: "end return finish done exit"
-  },
-  { symbol: "  ", name: "Blank", ascii: " ", description: "Do nothing.", searchtags: "empty" }
+  }
 ]
 
 export default instructions
