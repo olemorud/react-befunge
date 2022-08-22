@@ -1,6 +1,6 @@
 import { Card, CardContent, Grid, styled, Typography } from "@mui/material"
 import React from "react"
-import instructions, { Instruction } from "../Instructions"
+import instructions, { Instruction } from "../instructions"
 import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip"
 import { SIDEBAR_WIDTH } from "../const"
 
@@ -36,7 +36,7 @@ function handleDragStart(
   }
 
   event.dataTransfer.dropEffect = "copy"
-  event.dataTransfer.setData("text/plain", instruction.symbol)
+  event.dataTransfer.setData("instruction", JSON.stringify(instruction))
 }
 
 export default function InstructionMenu() {
@@ -45,7 +45,7 @@ export default function InstructionMenu() {
   return (
     <div style={sideBar}>
       <Grid container columns={2}>
-        {instructions.map((instruction: Instruction) => {
+        {instructions.slice(1).map((instruction: Instruction) => {
           return (
             <Grid item key={key++} xs={1}>
               <HtmlTooltip
