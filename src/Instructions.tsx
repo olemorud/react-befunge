@@ -6,7 +6,15 @@ export interface Instruction {
   searchtags: string
 }
 
+// first element should be the NOOP instruction
 const instructions: Instruction[] = [
+  {
+    symbol: " ",
+    name: "NOOP",
+    ascii: " ",
+    description: "do nothing and move program counter further",
+    searchtags: "nothing blank empty noop"
+  },
   {
     symbol: "0️⃣",
     name: "0",
