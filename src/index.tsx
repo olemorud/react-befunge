@@ -1,7 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 import "./index.css"
-import Board from "./Board"
+import Board from "./components/Board"
 import reportWebVitals from "./reportWebVitals"
 import InstructionMenu from "./InstructionMenu"
 
