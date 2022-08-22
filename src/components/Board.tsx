@@ -1,25 +1,34 @@
 import React, { useState } from "react"
 import { Card, CardContent, Grid, Typography } from "@mui/material"
 import instructions, { Instruction } from "../Instructions"
+import { BOARD_HEIGHT, BOARD_WIDTH, SELECTED_COLOR, SIDEBAR_WIDTH, TILE_SIZE } from "../const"
 
-interface Tile {
-  pointedAt: boolean
-  instruction: Instruction
+// considering renaming this to vector
+interface Point {
+  x: number
+  y: number
+}
+
+const Direction = {
+  Up: { x: -1, y: 0 },
+  Right: { x: 0, y: 1 },
+  Left: { x: 0, y: -1 },
+  Down: { x: 1, y: 0 }
 }
 
 function Board() {
-  const WIDTH = 10
-  const HEIGHT = 10
   let key = 0
 
-  const [board, setBoard] = useState<Tile[][]>(
-    new Array(HEIGHT).fill(0).map(() =>
-      new Array(WIDTH).fill(0).map((): Tile => {
-        return { pointedAt: false, instruction: structuredClone(instructions[0]) }
-      })
-    )
+  const [direction, setDirection] = useState<Point>(Direction.Right)
+  const [pointer, setPointer] = useState<Point>({ x: 0, y: 0 })
+
+  // this sure is a clean readable way to initialize a 2d array
+  const [board, setBoard] = useState<Instruction[][]>(
+    new Array(BOARD_HEIGHT)
+      .fill(0)
+      .map(() => new Array(BOARD_WIDTH).fill(0).map(() => structuredClone(instructions[0])))
   )
-  //.map(() => ({pointedAt: false, value: " ")}
+
   const handleDrop = (
     col: number,
     row: number,
@@ -30,10 +39,8 @@ function Board() {
       return
     }
 
-    const data = event.dataTransfer.getData("text/plain")
-    console.log(data, row, col)
     const x = [...board]
-    x[row][col].instruction.symbol = data
+    x[row][col].symbol = event.dataTransfer.getData("text/plain")
     console.log(x)
     setBoard(x)
   }
@@ -43,32 +50,52 @@ function Board() {
     return false
   }
 
+  const iterate = () => {
+    return null
+  }
+
   return (
-    <>
-      {
-        /* PRINT GRID */
-        board.map((row, rowNo): JSX.Element => {
-          return (
-            <Grid key={key++} container columns={WIDTH} spacing={1} rowSpacing={1}>
-              {row.map((element, colNo): JSX.Element => {
-                return (
-                  <div
-                    key={key++}
-                    onDragOver={handleOnDragOver}
-                    onDrop={(event) => handleDrop(colNo, rowNo, event)}>
-                    <Card sx={{ height: "5rem", width: "5rem", margins: "10px" }}>
-                      <CardContent>
-                        <Typography variant="body1">{element.instruction.symbol}</Typography>
-                      </CardContent>
-                    </Card>
-                  </div>
-                )
-              })}
-            </Grid>
-          )
-        })
-      }
-    </>
+    <div style={{ marginLeft: `${SIDEBAR_WIDTH + 1}rem` }}>
+      {board.map((row, rowNo): JSX.Element => {
+        return (
+          <Grid key={key++} container columns={BOARD_WIDTH} sx={{ width: `${5 * 12}rem` }}>
+            {row.map((element, colNo): JSX.Element => {
+              return (
+                <div
+                  style={{
+                    textAlign: "center",
+                    margin: "auto",
+                    verticalAlign: "middle"
+                  }}
+                  key={key++}
+                  onDragOver={handleOnDragOver}
+                  onDrop={(event) => handleDrop(colNo, rowNo, event)}>
+                  <Card
+                    sx={{
+                      height: `${TILE_SIZE}rem`,
+                      width: `${TILE_SIZE}rem`,
+                      margin: 1,
+                      color:
+                        rowNo === pointer.x && colNo === pointer.y ? SELECTED_COLOR : "0xFFFFFF"
+                    }}>
+                    <CardContent
+                      sx={{
+                        display: "inline",
+                        float: "none",
+                        margin: "auto"
+                      }}>
+                      <Typography sx={{ mt: "10%" }} variant="body1">
+                        {element.symbol}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </div>
+              )
+            })}
+          </Grid>
+        )
+      })}
+    </div>
   )
 }
 
