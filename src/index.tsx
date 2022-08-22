@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client"
 import "./index.css"
 import Board from "./components/Board"
 import reportWebVitals from "./reportWebVitals"
-import InstructionMenu from "./InstructionMenu"
+import InstructionMenu from "./components/InstructionMenu"
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(
