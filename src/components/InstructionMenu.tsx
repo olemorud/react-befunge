@@ -1,6 +1,6 @@
 import { Card, CardContent, styled, Typography } from "@mui/material"
 import React from "react"
-import instructions from "./Instructions"
+import instructions, { Instruction } from "../Instructions"
 import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip"
 
 const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
@@ -21,7 +21,7 @@ export default function InstructionMenu() {
   return (
     <>
       <div style={{ display: "flex" }}>
-        {instructions.map((instruction) => {
+        {instructions.map((instruction: Instruction) => {
           return (
             <div key={key++}>
               <HtmlTooltip
@@ -32,11 +32,11 @@ export default function InstructionMenu() {
                     <Typography>{instruction.description}</Typography>
                   </>
                 }>
-                <Card key={key++} sx={{ height: "3rem", width: "3rem" }}>
-                  <CardContent>
-                    <Typography sx={{ userSelect: "none" }}>{instruction.symbol}</Typography>
-                  </CardContent>
-                </Card>
+                  <Card key={key++} sx={{ height: "3rem", width: "3rem" }}>
+                    <CardContent>
+                      <Typography sx={{ userSelect: "none" }}>{instruction.symbol}</Typography>
+                    </CardContent>
+                  </Card>
               </HtmlTooltip>
             </div>
           )
