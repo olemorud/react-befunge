@@ -1,7 +1,8 @@
-import { Card, CardContent, styled, Typography } from "@mui/material"
+import { Card, CardContent, Grid, styled, Typography } from "@mui/material"
 import React from "react"
 import instructions, { Instruction } from "../Instructions"
 import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip"
+import { SIDEBAR_WIDTH } from "../const"
 
 const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -14,6 +15,16 @@ const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
     border: "1px solid #dadde9"
   }
 }))
+
+const sideBar: React.CSSProperties = {
+  height: "100%",
+  position: "fixed",
+  backgroundColor: "#999999",
+  //overflowX: "hidden",
+  paddingTop: "30px",
+  width: `${SIDEBAR_WIDTH}rem`,
+  justifyContent: "center"
+}
 
 function handleDragStart(
   instruction: Instruction,
@@ -32,11 +43,11 @@ export default function InstructionMenu() {
   let key = 0
 
   return (
-    <>
-      <div style={{ display: "flex" }}>
+    <div style={sideBar}>
+      <Grid container columns={2}>
         {instructions.map((instruction: Instruction) => {
           return (
-            <div key={key++}>
+            <Grid item key={key++} xs={1}>
               <HtmlTooltip
                 key={key++}
                 title={
@@ -53,10 +64,10 @@ export default function InstructionMenu() {
                   </Card>
                 </div>
               </HtmlTooltip>
-            </div>
+            </Grid>
           )
         })}
-      </div>
-    </>
+      </Grid>
+    </div>
   )
 }
