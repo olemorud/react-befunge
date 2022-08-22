@@ -15,6 +15,19 @@ const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
   }
 }))
 
+function handleDragStart(
+  instruction: Instruction,
+  event: React.DragEvent<HTMLDivElement> | undefined
+): void {
+  if (event === undefined) {
+    console.log("handleDragStart: event is undefined")
+    return
+  }
+
+  event.dataTransfer.dropEffect = "copy"
+  event.dataTransfer.setData("text/plain", instruction.symbol)
+}
+
 export default function InstructionMenu() {
   let key = 0
 
@@ -32,11 +45,13 @@ export default function InstructionMenu() {
                     <Typography>{instruction.description}</Typography>
                   </>
                 }>
+                <div draggable="true" onDragStart={(event) => handleDragStart(instruction, event)}>
                   <Card key={key++} sx={{ height: "3rem", width: "3rem" }}>
                     <CardContent>
                       <Typography sx={{ userSelect: "none" }}>{instruction.symbol}</Typography>
                     </CardContent>
                   </Card>
+                </div>
               </HtmlTooltip>
             </div>
           )
