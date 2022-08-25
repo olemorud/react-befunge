@@ -3,6 +3,7 @@ import { Card, CardContent, Grid, IconButton, TextField, Typography } from "@mui
 import { Instruction } from "../instructions"
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight"
 import PlayArrowIcon from "@mui/icons-material/PlayArrow"
+import SaveIcon from "@mui/icons-material/Save"
 import StopIcon from "@mui/icons-material/Stop"
 
 import {
@@ -15,6 +16,8 @@ import {
   TILE_SIZE
 } from "../const"
 import { iterate, newProgram, ProgramState, resetProgram } from "../interpreter"
+import FileUpload from "./FileUpload"
+import loadProgram, { save } from "../filehandler"
 
 function Board() {
   let key = 0
@@ -48,7 +51,7 @@ function Board() {
     //iterate(x)
     setProgram((prog) => {
       const x = structuredClone(prog)
-    iterate(x)
+      iterate(x)
       return x
     })
   }
@@ -96,11 +99,19 @@ function Board() {
               {playing ? <StopIcon /> : <PlayArrowIcon />}
             </IconButton>
             <IconButton onClick={() => step()}>
-          <KeyboardDoubleArrowRightIcon />
-        </IconButton>
+              <KeyboardDoubleArrowRightIcon />
+            </IconButton>
             <IconButton href={save(program)} download="save.json">
               <SaveIcon />
             </IconButton>
+            <input
+              type="file"
+              onInput={
+                () => {
+                  console.log("TODO")
+                } /*loadProgram(program, )*/
+              }
+            />
           </Grid>
           <Grid item xs={4}>
             <Typography>output: {program.output}</Typography>

@@ -8,6 +8,22 @@ interface SaveState {
   program: string[]
 }
 
+export default function loadProgram(to: ProgramState, save: SaveState) {
+  resetProgram(to)
+  to.board = newBoard(save.width, save.height)
+
+  save.program.forEach((line, row) => {
+    line.split("").forEach((char, col) => {
+      const index = instructions.findIndex((ins) => {
+        ins.bytecode === char
+      })
+
+      if (index !== -1) {
+        to.board[row][col] = instructions[index]
+      }
+    })
+  })
+}
 
 export function save(program: ProgramState): string {
   const saveObject: SaveState = {
