@@ -1,7 +1,7 @@
 export interface Instruction {
-  symbol: string
+  emoji: string
   name: string
-  ascii: string
+  bytecode: string
   description: string
   searchtags: string
 }
@@ -9,264 +9,264 @@ export interface Instruction {
 // first element should be the NOOP instruction
 const instructions: Instruction[] = [
   {
-    symbol: " ",
+    emoji: " ",
     name: "NOOP",
-    ascii: " ",
+    bytecode: " ",
     description: "do nothing and move program counter further",
     searchtags: "nothing blank empty noop"
   },
   {
-    symbol: "0️⃣",
+    emoji: "0️⃣",
     name: "0",
-    ascii: "0",
+    bytecode: "0",
     description: "Push 0 to the stack",
     searchtags: "zero  0 number value"
   },
   {
-    symbol: "1️⃣",
+    emoji: "1️⃣",
     name: "1",
-    ascii: "1",
+    bytecode: "1",
     description: "Push 1 to the stack",
     searchtags: "one   1 number value"
   },
   {
-    symbol: "2️⃣",
+    emoji: "2️⃣",
     name: "2",
-    ascii: "2",
+    bytecode: "2",
     description: "Push 2 to the stack",
     searchtags: "two   2 number value"
   },
   {
-    symbol: "3️⃣",
+    emoji: "3️⃣",
     name: "3",
-    ascii: "3",
+    bytecode: "3",
     description: "Push 3 to the stack",
     searchtags: "three 3 number value"
   },
   {
-    symbol: "4️⃣",
+    emoji: "4️⃣",
     name: "4",
-    ascii: "4",
+    bytecode: "4",
     description: "Push 4 to the stack",
     searchtags: "four  4 number value"
   },
   {
-    symbol: "5️⃣",
+    emoji: "5️⃣",
     name: "5",
-    ascii: "5",
+    bytecode: "5",
     description: "Push 5 to the stack",
     searchtags: "five  5 number value"
   },
   {
-    symbol: "6️⃣",
+    emoji: "6️⃣",
     name: "6",
-    ascii: "6",
+    bytecode: "6",
     description: "Push 6 to the stack",
     searchtags: "six   6 number value"
   },
   {
-    symbol: "7️⃣",
+    emoji: "7️⃣",
     name: "7",
-    ascii: "7",
+    bytecode: "7",
     description: "Push 7 to the stack",
     searchtags: "seven 7 number value"
   },
   {
-    symbol: "8️⃣",
+    emoji: "8️⃣",
     name: "8",
-    ascii: "8",
+    bytecode: "8",
     description: "Push 8 to the stack",
     searchtags: "eight 8 number value"
   },
   {
-    symbol: "9️⃣",
+    emoji: "9️⃣",
     name: "9",
-    ascii: "9",
+    bytecode: "9",
     description: "Push 9 to the stack",
     searchtags: "nine  9 number value"
   },
   {
-    symbol: "👈",
-    name: "left",
-    ascii: "<",
+    emoji: "👈",
+    name: "left direction",
+    bytecode: "<",
     description: "Make program counter point left",
     searchtags: "hand left direction"
   },
   {
-    symbol: "👉",
-    name: "right",
-    ascii: ">",
+    emoji: "👉",
+    name: "right direction",
+    bytecode: ">",
     description: "Make program counter point right",
     searchtags: "hand right direction"
   },
   {
-    symbol: "👇",
-    name: "down",
-    ascii: "v",
+    emoji: "👇",
+    name: "down direction",
+    bytecode: "v",
     description: "Make program counter point down",
     searchtags: "hand down direction"
   },
   {
-    symbol: "👆",
-    name: "up",
-    ascii: "^",
+    emoji: "👆",
+    name: "up direction",
+    bytecode: "^",
     description: "Make program counter point up",
     searchtags: "hand up direction"
   },
   {
-    symbol: "➕",
+    emoji: "➕",
     name: "add",
-    ascii: "+",
+    bytecode: "+",
     description: "Pop two values a and b, then push the result of a+b",
     searchtags: "add plus +"
   },
   {
-    symbol: "➖",
+    emoji: "➖",
     name: "subtract",
-    ascii: "-",
+    bytecode: "-",
     description: "Pop two values a and b, then push the result of a-b",
     searchtags: "subtract minus -"
   },
   {
-    symbol: "✖️",
+    emoji: "✖️",
     name: "multiply",
-    ascii: "*",
+    bytecode: "*",
     description: "Pop two values a and b, then push the result of a*b",
     searchtags: "multiply multiplication x *"
   },
   {
-    symbol: "➗",
+    emoji: "➗",
     name: "divide",
-    ascii: "/",
+    bytecode: "/",
     description: "Pop two values a and b, then push the result of a/b",
     searchtags: "divide division /"
   },
   {
-    symbol: "🚮",
+    emoji: "🚮",
     name: "modulo",
-    ascii: "%",
+    bytecode: "%",
     description: "Pop two values a and b, then push the result of a mod b",
     searchtags: "modulo remainder"
   },
   {
-    symbol: "🚫",
+    emoji: "🚫",
     name: "logical not",
-    ascii: "!",
+    bytecode: "!",
     description: "Pop a value. If the value is zero, push 1; otherwise, push zero.",
     searchtags: "logical not"
   },
   {
-    symbol: "📏",
+    emoji: "📏",
     name: "greater than",
-    ascii: "`",
+    bytecode: "`",
     description: "Pop two values a and b, then push 1 if b>a, otherwise zero.",
     searchtags: "greater than > < ruler"
   },
   {
-    symbol: "🎲",
+    emoji: "🎲",
     name: "random direction",
-    ascii: "?",
+    bytecode: "?",
     description: "Change direction randomly",
     searchtags: "random direction dice"
   },
   {
-    symbol: "🔛",
+    emoji: "🔛",
     name: "horizontal if",
-    ascii: "_",
+    bytecode: "_",
     description: "Pop a value; set direction to right if value=0, set to left otherwise",
     searchtags: "left right conditional if leftright"
   },
   {
-    symbol: "🪜",
+    emoji: "🪜",
     name: "vertical if",
-    ascii: "|",
+    bytecode: "|",
     description: "pop a value; set direction to down if value=0, set to up otherwise",
     searchtags: "up down conditional if ladder"
   },
   {
-    symbol: "📜",
+    emoji: "📜",
     name: "string mode",
-    ascii: "''",
+    bytecode: '"',
     description:
       "Toggle stringmode (push each character's ASCII value all the way up to the next \")",
     searchtags: "string stringmode char scroll"
   },
   {
-    symbol: "🧬",
+    emoji: "🧬",
     name: "duplicate",
-    ascii: ":",
+    bytecode: ":",
     description: "Duplicate top stack value",
     searchtags: "duplicate dna"
   },
   {
-    symbol: "💱",
+    emoji: "💱",
     name: "swap",
-    ascii: "\\",
+    bytecode: "\\",
     description: "Swap top stack values",
     searchtags: "swap"
   },
   {
-    symbol: "🗑️",
+    emoji: "🗑️",
     name: "discard",
-    ascii: "$",
+    bytecode: "$",
     description: "Pop top of stack and discard",
     searchtags: "pop discard trash delete"
   },
   {
-    symbol: "🔢",
+    emoji: "🔢",
     name: "print number",
-    ascii: ".",
+    bytecode: ".",
     description: "Pop top of stack and output as integer",
     searchtags: "pop print write integer number"
   },
   {
-    symbol: "✍",
+    emoji: "✍",
     name: "print character",
-    ascii: ",",
+    bytecode: ",",
     description: "Pop top of stack and output as ASCII character",
     searchtags: "pop print write char"
   },
   {
-    symbol: "🦘",
+    emoji: "🦘",
     name: "jump",
-    ascii: "#",
+    bytecode: "#",
     description: "Jump over next command",
     searchtags: "bridge jump skip kangaroo"
   },
   {
-    symbol: "📥",
+    emoji: "📥",
     name: "get",
-    ascii: "g",
+    bytecode: "g",
     description:
       'A "get" call (a way to retrieve data in storage). Pop two values y and x, then push the ASCII value of the character at that position in the program. If (x,y) is out of bounds, push 0',
     searchtags: "get"
   },
   {
-    symbol: "📤",
+    emoji: "📤",
     name: "put",
-    ascii: "p",
+    bytecode: "p",
     description:
       'A "put" call (a way to store a value for later use). Pop three values y, x and v, then change the character at the position (x,y) in the program to the character with ASCII value v',
     searchtags: "put"
   },
   {
-    symbol: "📲",
+    emoji: "📲",
     name: "number input",
-    ascii: "&",
+    bytecode: "&",
     description: "Get number from user input and push it",
     searchtags: "input integer"
   },
   {
-    symbol: "🔤",
+    emoji: "🔤",
     name: "character input",
-    ascii: "~",
+    bytecode: "~",
     description: "Get character from user and push it",
     searchtags: "input character"
   },
   {
-    symbol: "🏁",
+    emoji: "🏁",
     name: "end",
-    ascii: "@",
+    bytecode: "@",
     description: "End program",
     searchtags: "end return finish done exit"
   }
