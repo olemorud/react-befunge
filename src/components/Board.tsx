@@ -98,6 +98,9 @@ function Board() {
             <IconButton onClick={() => step()}>
           <KeyboardDoubleArrowRightIcon />
         </IconButton>
+            <IconButton href={save(program)} download="save.json">
+              <SaveIcon />
+            </IconButton>
           </Grid>
           <Grid item xs={4}>
             <Typography>output: {program.output}</Typography>
