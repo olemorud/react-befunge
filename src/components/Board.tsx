@@ -27,17 +27,14 @@ function Board() {
     if (playing) {
       intervalRef.current = setInterval(() => {
         step()
-        console.log("a")
       }, STEP_DELAY)
     } else {
       clearInterval(intervalRef.current)
-      console.log(program)
     }
   }, [playing])
 
   useEffect(() => {
     if (program.done) {
-      console.log("done")
       const x = structuredClone(program)
       resetProgram(x)
       setPlaying(false)
