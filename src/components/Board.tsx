@@ -6,8 +6,8 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow"
 import StopIcon from "@mui/icons-material/Stop"
 
 import {
-  BOARD_HEIGHT,
-  BOARD_WIDTH,
+  DEFAULT_WIDTH,
+  DEFAULT_HEIGHT,
   DEFAULT_TILE_COLOR,
   SELECTED_TILE_COLOR,
   SIDEBAR_WIDTH,
@@ -19,7 +19,7 @@ import { iterate, newProgram, ProgramState, resetProgram } from "../interpreter"
 function Board() {
   let key = 0
 
-  const [program, setProgram] = useState<ProgramState>(newProgram())
+  const [program, setProgram] = useState<ProgramState>(newProgram(DEFAULT_WIDTH, DEFAULT_HEIGHT))
   const [playing, setPlaying] = useState<boolean>(false)
   const intervalRef = useRef<NodeJS.Timer>()
 
@@ -111,7 +111,11 @@ function Board() {
       {/* BOARD */}
       {program.board.map((row, rowNo): JSX.Element => {
         return (
-          <Grid key={key++} container columns={BOARD_WIDTH} sx={{ width: `${6 * BOARD_WIDTH}rem` }}>
+          <Grid
+            key={key++}
+            container
+            columns={program.width}
+            sx={{ width: `${6 * program.width}rem` }}>
             {row.map((tile, colNo): JSX.Element => {
               return (
                 <div

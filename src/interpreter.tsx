@@ -1,9 +1,11 @@
-import { BOARD_HEIGHT, BOARD_WIDTH } from "./const"
+import { DEFAULT_HEIGHT, DEFAULT_WIDTH } from "./const"
 import instructions, { Instruction } from "./instructions"
 
 export interface ProgramState {
   instructionPointer: Point
   direction: Point
+  width: number
+  height: number
   stack: number[]
   board: Instruction[][]
   output: string
@@ -27,12 +29,14 @@ const Direction = {
  * Creates a new program
  * @returns new program object with initialized attributes
  */
-export const newProgram = () => {
+export const newProgram = (width: number, height: number) => {
   const program: ProgramState = {
     instructionPointer: { x: 0, y: 0 },
     direction: Direction.Right,
+    width: width,
+    height: height,
     stack: [],
-    board: newBoard(),
+    board: newBoard(width, height),
     output: "",
     stringmode: false,
     done: true
@@ -69,10 +73,10 @@ export const resetProgram = (program: ProgramState) => {
  * Initializes a 2D array of instructions with all elements set to the NOOP instruction
  * @returns Instruction[BOARD_HEIGHT][BOARD_WIDTH]
  */
-export const newBoard = () => {
-  return new Array(BOARD_HEIGHT)
+export const newBoard = (width: number, height: number) => {
+  return new Array(height)
     .fill(0)
-    .map(() => new Array(BOARD_WIDTH).fill(0).map(() => structuredClone(instructions[0])))
+    .map(() => new Array(width).fill(0).map(() => structuredClone(instructions[0])))
 }
 
 /**
@@ -99,9 +103,9 @@ const step = (program: ProgramState) => {
   program.instructionPointer.y += program.direction.y
 
   if (
-    program.instructionPointer.x >= BOARD_WIDTH ||
+    program.instructionPointer.x >= DEFAULT_WIDTH ||
     program.instructionPointer.x < 0 ||
-    program.instructionPointer.y >= BOARD_HEIGHT ||
+    program.instructionPointer.y >= DEFAULT_HEIGHT ||
     program.instructionPointer.y < 0
   ) {
     console.log("pointer out of bounds, resetting program")
