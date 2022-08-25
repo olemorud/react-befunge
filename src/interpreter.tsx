@@ -57,7 +57,7 @@ export const resetProgram = (program: ProgramState) => {
   })*/
 
   program.direction = Direction.Right
-  program.done = false
+  program.done = true
   program.instructionPointer.x = 0
   program.instructionPointer.y = 0
   program.output = ""

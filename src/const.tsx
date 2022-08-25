@@ -4,5 +4,6 @@ export const DEFAULT_TILE_COLOR = "0xFFFFFF"
 export const BOARD_WIDTH = 10
 export const BOARD_HEIGHT = 10
 export const TILE_SIZE = 5
+export const STEP_DELAY = 300
 
 export default {}

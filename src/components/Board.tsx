@@ -11,6 +11,7 @@ import {
   DEFAULT_TILE_COLOR,
   SELECTED_TILE_COLOR,
   SIDEBAR_WIDTH,
+  STEP_DELAY,
   TILE_SIZE
 } from "../const"
 import { iterate, newProgram, ProgramState, resetProgram } from "../interpreter"
@@ -20,20 +21,39 @@ function Board() {
 
   const [program, setProgram] = useState<ProgramState>(newProgram())
   const [playing, setPlaying] = useState<boolean>(false)
+  const intervalRef = useRef<NodeJS.Timer>()
+
+  useEffect(() => {
+    if (playing) {
+      intervalRef.current = setInterval(() => {
+        step()
+        console.log("a")
+      }, STEP_DELAY)
+    } else {
+      clearInterval(intervalRef.current)
+      console.log(program)
+    }
+  }, [playing])
 
   useEffect(() => {
     if (program.done) {
+      console.log("done")
       const x = structuredClone(program)
       resetProgram(x)
+      setPlaying(false)
       x.done = false
       setProgram(x)
     }
   }, [program])
 
   const step = () => {
-    const x = structuredClone(program)
+    //const x = structuredClone(program)
+    //iterate(x)
+    setProgram((prog) => {
+      const x = structuredClone(prog)
     iterate(x)
-    setProgram(x)
+      return x
+    })
   }
 
   const handleDrop = (
@@ -94,7 +114,7 @@ function Board() {
       {/* BOARD */}
       {program.board.map((row, rowNo): JSX.Element => {
         return (
-          <Grid key={key++} container columns={BOARD_WIDTH} sx={{ width: `${5 * 12}rem` }}>
+          <Grid key={key++} container columns={BOARD_WIDTH} sx={{ width: `${6 * BOARD_WIDTH}rem` }}>
             {row.map((tile, colNo): JSX.Element => {
               return (
                 <div
