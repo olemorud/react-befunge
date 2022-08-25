@@ -8,6 +8,7 @@ const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
 ))(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
+    placement: "right",
     backgroundColor: "#f5f5f9",
     color: "rgba(0, 0, 0, 0.87)",
     maxWidth: 220,
@@ -49,6 +50,8 @@ export default function InstructionMenu() {
           return (
             <Grid item key={key++} xs={1}>
               <HtmlTooltip
+                placement="right"
+                disableInteractive
                 key={key++}
                 title={
                   <>
@@ -59,7 +62,7 @@ export default function InstructionMenu() {
                 <div draggable="true" onDragStart={(event) => handleDragStart(instruction, event)}>
                   <Card key={key++} sx={{ height: "3rem", width: "3rem" }}>
                     <CardContent>
-                      <Typography sx={{ userSelect: "none" }}>{instruction.symbol}</Typography>
+                      <Typography sx={{ userSelect: "none" }}>{instruction.emoji}</Typography>
                     </CardContent>
                   </Card>
                 </div>
