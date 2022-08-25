@@ -2,6 +2,8 @@
 
 ## How to run
 Install NodeJS
+
+Run with
 ```
 npm run start
 ```
